@@ -6,7 +6,6 @@ This code is based on ReactNative EXPO sample using CLI (https://reactnative.dev
 Install it
 ```shell script
 yarn install
-yarn web
 ```
 
 Launch the application in the browser

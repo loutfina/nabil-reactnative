@@ -1,16 +1,29 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+import { useSelector} from 'react-redux';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+import { View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 
+import Login from '../components/Login/Login';
+import MessageList from '../components/MessageList/MessageList';
+import MessageForm from '../components/MessageForm/MessageForm';
+
+
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+
+  const user = useSelector((state:any) => state.login.user);  // useSelector subscribe for update on state.<sliceName>.<value>
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+      {!user && <>
+        <Login /> 
+        <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      </>
+      }
+      <MessageList />
+      <MessageForm />
+    
     </View>
   );
 }

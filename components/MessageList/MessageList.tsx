@@ -45,7 +45,7 @@ function MessageList() {
 
   function formatDate(dateString : string){
     let d = new Date(dateString);
-    return d.getDay() + '/'+d.getMonth()+1+ '/'+d.getFullYear()+ " " + d.getHours()+":"+d.getMinutes();
+    return d.getDay() + '/'+(d.getMonth()+1)+ '/'+d.getFullYear()+ " " + d.getHours()+":"+d.getMinutes();
   }
 
   const renderItem = ({ item, index }:any) => {

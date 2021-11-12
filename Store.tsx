@@ -28,7 +28,7 @@ export const httpNabilMiddleware:Middleware = (store:Store) => (next: Dispatch<A
       console.log("HTTP Middleware error :",error.response?.status, error.message, action);
       Alert.alert(
         "HTTP Middleware error",
-        "("+error.response?.status +") "+ error.message,
+        "("+error.response?.status +") "+ error.message+". >>Backend on "+process.env.REACT_APP_API_URL,
         [{ text: "X", style: "cancel" }],
         { cancelable: true}
       );

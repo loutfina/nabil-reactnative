@@ -22,12 +22,13 @@ class ApiService {
 
     const path   = this._endpointPath(endpoint, params);
     const result = await axios.get(path, config);
- 
-    if (result.status > 200) {
+
+    result.status = result.data ? result.data.status : result.status;
+    if (result && result.status > 200) {
       console.error('Api call returned an error', result);
       throw result;
     }
-
+    
     const value  = result.data;
     
     if (endpoint.isCached) {

@@ -6,7 +6,6 @@ import { fetchMessageSince } from './messageAction';
 const themeCard = "Light"; //Primary',  'Success', 'Danger', 'Warning', 'Info', 'Light', 'Dark',
 var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
 const themeTeams = true
-var optionsTeams:Intl.DateTimeFormatOptions = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',  };
 
 function MessageList() {
 
@@ -44,22 +43,25 @@ function MessageList() {
     return (val.user && user && val.user.id==user.id)
   }
 
+  function formatDate(dateString : string){
+    let d = new Date(dateString);
+    return d.getDay() + '/'+d.getMonth()+1+ '/'+d.getFullYear()+ " " + d.getHours()+":"+d.getMinutes();
+  }
+
   const renderItem = ({ item, index }:any) => {
     const backgroundColor = isMe(item) ? "white" : "azure";
-    const marginLeft= isMe(item) ? "20%" : "0";
+    const marginLeft= isMe(item) ? 60 : 0;
     return (
-      <View style={[{backgroundColor, marginLeft},styles.message]}>
+      <View style={[styles.message,{backgroundColor, marginLeft}]}>
         { !isSameMessage(item, index) &&
         <View style={styles.messageHeader} >
           {!isMe(item) &&  <Text style={styles.name}>{item.user?.name}</Text> }
          
-          <small><i>{new Intl.DateTimeFormat("fr-FR", optionsTeams).format(new Date(item.creationDate))}</i></small>
+          <Text style={styles.date}>{formatDate(item.creationDate)}</Text>
         </View>
-        }
-        <View>
-          <Text style={{padding : 5}}>{item.texte}</Text>
-        </View>
-      </View>
+        }        
+        <Text style={{padding : 5}}>{item.texte}</Text>
+      </View> 
     );
   };
 
@@ -93,6 +95,10 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: 'bold'
+  },
+  date: {
+    fontSize: 12,
+    fontStyle: 'italic'
   },
   messageHeader: {
     flexDirection: "row", 

@@ -19,6 +19,8 @@ import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
+import { Text } from '../components/Themed';
+
 import { useSelector } from 'react-redux';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -83,7 +85,7 @@ function BottomTabNavigator() {
                 color={Colors[colorScheme].text}
                 style={{ marginRight: 15 }}
               />
-              {user?.name}
+              <Text>{user?.name}</Text>
             </Pressable>
           ),
         })}
